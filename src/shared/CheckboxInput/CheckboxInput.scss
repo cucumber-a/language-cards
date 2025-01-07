@@ -1,0 +1,14 @@
+@import '../../styles/vars';
+
+.checkbox {
+  cursor: pointer;
+  
+  &__label {
+    margin-left: $unit;
+  }
+
+  &__checkbox,
+  &__label {
+    cursor: pointer;
+  }
+}

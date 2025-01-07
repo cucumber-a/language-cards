@@ -8,9 +8,10 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "cra-template-typescript": "1.2.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.83.1",
     "typescript": "^5.7.2"
   },
   "scripts": {

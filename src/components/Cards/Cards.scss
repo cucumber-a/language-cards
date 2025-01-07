@@ -1,0 +1,21 @@
+@import '../../styles/vars';
+
+.cards {
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $unit-half;
+
+    .speech-parts {
+      display: flex;
+      justify-content: center;
+      gap: $unit;
+    }
+  }
+
+  &__back-button {
+    align-self: flex-start;
+  }
+
+}

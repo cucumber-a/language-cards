@@ -1,0 +1,11 @@
+@import '../../styles/vars';
+
+.speech-part-chooser {
+  &__checkbox-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $unit-3;
+    margin-bottom: $unit-3;
+  }
+}
