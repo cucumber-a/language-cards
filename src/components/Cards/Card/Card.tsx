@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Word } from '../CardsGenerator/CardsGenerator';
 import { SpeechPart } from '../../../App';
 import { WordExample } from '../WordExample/WordExample';
@@ -12,6 +12,10 @@ type CardProps = {
 
 export function Card({ word, speechPart, onNextWord }: CardProps) {
   const [showTranslation, setShowTranslation] = React.useState(false);
+
+  useEffect(() => {
+    setShowTranslation(false);
+  }, [word]);
 
   const translationContent = () => {
     return (
