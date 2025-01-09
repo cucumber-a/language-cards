@@ -2,6 +2,7 @@ import React from 'react';
 import { Word } from '../CardsGenerator/CardsGenerator';
 import { SpeechPart } from '../../../App';
 import { WordExample } from '../WordExample/WordExample';
+import './Card.scss';
 
 type CardProps = {
   word: Word;
@@ -15,7 +16,7 @@ export function Card({ word, speechPart, onNextWord }: CardProps) {
   const translationContent = () => {
     return (
       <div className='card__translation'>
-        {word.translation}
+        <span className='text_primary'>{word.translation}</span>
 
         <div className='card__examples'>
           {word.examples.map((example) => <WordExample key={example.example} example={example} />)}
@@ -26,15 +27,18 @@ export function Card({ word, speechPart, onNextWord }: CardProps) {
 
   return (
     <div className='card'>
-      <div className='card__word'>{word.word}</div>
+      <div className='card__description'>
+        <div className='card__word text_primary'>{word.word}</div>
+        { showTranslation && translationContent()}
+      </div>
 
-      <button className='button_primary' onClick={() => setShowTranslation(!showTranslation)}>
-        {showTranslation ? 'Hide translation' : 'Show translation'}
-      </button>
+      <div className='card__actions'>
+        <button className='button_primary button_primary-second' onClick={() => setShowTranslation(!showTranslation)}>
+          {showTranslation ? 'Hide translation' : 'Show translation'}
+        </button>
+        <button className='button_primary' onClick={onNextWord}>Next</button>
+      </div>
 
-      { showTranslation && translationContent()}
-
-      <button className='nutton_primary' onClick={onNextWord}>Next word</button>
     </div>
   );
 }

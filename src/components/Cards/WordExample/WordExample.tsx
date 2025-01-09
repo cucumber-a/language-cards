@@ -1,5 +1,6 @@
 import React from 'react';
 import { Example } from '../CardsGenerator/CardsGenerator';
+import './WordExample.scss';
 
 type ExampleProps = {
   example: Example;

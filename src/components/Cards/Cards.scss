@@ -9,7 +9,7 @@
 
     .speech-parts {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: $unit;
     }
   }

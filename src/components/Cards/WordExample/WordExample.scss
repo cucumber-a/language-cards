@@ -1,0 +1,16 @@
+@import '../../../styles/vars';
+@import '../../../styles/colors';
+
+
+.example {
+  margin-bottom: $unit-2;
+
+  &__original {
+    color: $white;
+    margin-bottom: $unit-half;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}

@@ -19,6 +19,11 @@
   }
 }
 
+.button_primary-second {
+  @extend .button_primary;
+  background-color: $pink;
+}
+
 .button_secondary {
   @extend .button;
   background-color: $white;
@@ -46,5 +51,9 @@
   @extend .text;
   font-size: $font-size-secondary;
   color: $text-secondary;
+}
+
+.text_primary {
+  font-size: $font-size-big;
 }
 
