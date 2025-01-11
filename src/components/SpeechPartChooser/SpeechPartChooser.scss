@@ -1,17 +1,17 @@
 @import '../../styles/vars';
 
 .speech-part-chooser {
-  &__checkbox-list {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: $unit-3;
-    margin-bottom: $unit-3;
-    justify-content: center;
-    max-width: 80%;
-    margin: auto;
-    row-gap: $unit;
-    margin: auto;
-    padding: $unit-2 0 $unit-4 0;
-  }
+    &__checkbox-list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: $unit-3;
+        margin-bottom: $unit-3;
+        justify-content: center;
+        max-width: 80%;
+        margin: auto;
+        row-gap: $unit;
+        margin: auto;
+        padding: $unit-2 0 $unit-4 0;
+    }
 }
