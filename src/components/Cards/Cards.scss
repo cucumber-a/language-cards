@@ -2,20 +2,20 @@
 
 .cards {
 
-  &__header {
-    display: flex;
-    flex-direction: column;
-    gap: $unit-half;
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: $unit-half;
 
-    .speech-parts {
-      display: flex;
-      justify-content: flex-start;
-      gap: $unit;
+        .speech-parts {
+            display: flex;
+            justify-content: flex-start;
+            gap: $unit;
+        }
     }
-  }
 
-  &__back-button {
-    align-self: flex-start;
-  }
+    &__back-button {
+        align-self: flex-start;
+    }
 
 }

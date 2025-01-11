@@ -3,14 +3,14 @@ import { Example } from '../CardsGenerator/CardsGenerator';
 import './WordExample.scss';
 
 type ExampleProps = {
-  example: Example;
+    example: Example;
 }
 
 export function WordExample({ example }: ExampleProps) {
-  return (
-    <div className='example'>
-      <div className='example__original'>{example.example}</div>
-      <div className='example__translation'>{example.translation}</div>
-    </div>
-  );
+    return (
+        <div className='example'>
+            <div className='example__original'>{example.example}</div>
+            <div className='example__translation'>{example.translation}</div>
+        </div>
+    );
 }
