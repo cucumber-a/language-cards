@@ -5,12 +5,13 @@ import { Card } from './Card/Card';
 
 type CardsProps = {
     speechParts: SpeechPart[];
-    data: Words;
+    data: Words | undefined;
     onBack: () => void;
 }
 
-const useAllowedWordsState = (selectedSpeechParts: SpeechPart[], data: Words) => {
+const useAllowedWordsState = (selectedSpeechParts: SpeechPart[], data: Words | undefined) => {
     return React.useState<Word[]>(() => {
+        if (!data) return [];
         const words = selectedSpeechParts.map((speechPart) => data[speechPart]);
         return words.flat();
     });
