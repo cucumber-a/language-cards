@@ -24,7 +24,9 @@ export default [
     },
     {
         rules: {
-            "object-curly-spacing": ["error", "always"]
+            "object-curly-spacing": ["error", "always"],
+            "no-unused-vars": "off",
+            "no-explicity-any": "warn",
         }
     }
 ];
