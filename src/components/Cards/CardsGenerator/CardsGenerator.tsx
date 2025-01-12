@@ -80,7 +80,8 @@ export function CardsGenerator({ selectedSpeechParts, onBack }: CardsGeneratorPr
 
         return (
             <Card word={currentWord}
-                onNextWord={generateNextWord}>
+                  key={currentWord.word}
+                  onNextWord={generateNextWord}>
             </Card>
         );
     }
