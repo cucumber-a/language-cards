@@ -1,5 +1,5 @@
-@import '../../../styles/vars';
-@import '../../../styles/colors';
+@import 'styles/vars';
+@import 'styles/colors';
 
 .card {
     border: 1px solid $pink;
@@ -7,27 +7,28 @@
     margin: $unit-2 0;
     padding: $unit-2;
     width: 30vw;
-    height: 50dvh;
+    height: 65dvh;
     min-width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
 
-    &__description {
-        margin-top: $unit-4;
+    &__content {
+        margin-top: $unit-3;
     }
 
     &__word {
-        margin-bottom: $unit;
+        margin-bottom: $unit-half;
+        font-size: 2rem;
     }
 
     &__translation {
         color: $text-secondary;
-
     }
 
     &__examples {
-        margin-top: $unit-3;
+        margin-top: $unit-2;
     }
 
     &__actions {

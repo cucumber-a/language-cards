@@ -8,20 +8,14 @@ type CheckboxInputProps = {
 }
 
 export function CheckboxInput({ label, value, onUpdate }: CheckboxInputProps) {
-
-    const onChange = React.useMemo<React.ChangeEventHandler<HTMLInputElement>>(() => {
-        return (event) => onUpdate(event.target.checked);
-    }, [onUpdate]);
-
     return (
         <div className='checkbox'>
             <input type="checkbox"
                 className='checkbox__checkbox'
-                onChange={onChange}
+                onChange={(event) => onUpdate(event.target.checked)}
                 id={label}
                 name={label}
                 checked={value} />
-
             <label className='checkbox__label' htmlFor={label}>{label}</label>
         </div>
     )

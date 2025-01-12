@@ -1,0 +1,16 @@
+@import 'styles/vars';
+@import 'styles/colors';
+
+.header {
+    position: fixed;
+    top: 0;
+    padding: $unit;
+    padding: 10px;
+    background: #282c34;
+    width: 100%;
+}
+
+.version {
+    color: $text-secondary;
+    font-size: 0.9rem;
+}

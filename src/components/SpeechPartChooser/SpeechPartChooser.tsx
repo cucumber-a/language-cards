@@ -1,62 +1,72 @@
 import React from 'react';
-import { SpeechPart } from "../../App"
 import { CheckboxInput } from '../../shared/CheckboxInput/CheckboxInput';
 import './SpeechPartChooser.scss'
+import { SpeechPart, SpeechPartEnum } from 'types';
 
 type SpeechPartProps = {
+    selectedSpeechParts: SpeechPart[];
     onContinue: (speechParts: SpeechPart[]) => void,
 }
 
-export function SpeechPartChooser({ onContinue: propsOnContinue }: SpeechPartProps) {
+function setInitialSpeechParts(selectedSpeechParts: SpeechPart[] = []): Record<SpeechPartEnum, boolean> {
+    const selectedParts = {
+        [SpeechPartEnum.VERB]: false,
+        [SpeechPartEnum.NOUN]: false,
+        [SpeechPartEnum.ADJECTIVE]: false,
+        [SpeechPartEnum.ADVERB]: false,
+        [SpeechPartEnum.OTHER]: false,
+    };
+    selectedSpeechParts.forEach((speechPart) => selectedParts[speechPart] = true);
+    return selectedParts;
+}
 
-    const [speechParts, setSpeechParts] = React.useState<Record<SpeechPart, boolean>>({
-        'Verbs': true,
-        'Nouns': true,
-        'Adjectives': true,
-        'Adverbs': true,
-        'Other': true,
-    });
+export function SpeechPartChooser({ selectedSpeechParts, onContinue }: SpeechPartProps) {
+    const [speechParts, setSpeechParts] = React.useState(setInitialSpeechParts(selectedSpeechParts));
 
-    const onContinue = React.useMemo<React.MouseEventHandler<HTMLButtonElement>>(() => {
+    const isContinueDisabled = Object.values(speechParts).every((v) => !v);
+    
+    const onContinueClick = () => {
         const selectedSpeechParts: SpeechPart[] = [];
         (Object.keys(speechParts) as SpeechPart[]).forEach((key) => {
             if (speechParts[key]) {
                 selectedSpeechParts.push(key);
             }
         });
-        return () => propsOnContinue(selectedSpeechParts);
-    }, [propsOnContinue, speechParts]);
+        return onContinue(selectedSpeechParts);
+    };
 
     const onCheckboxUpdate = (label: SpeechPart, checked: boolean) => {
         setSpeechParts({
             ...speechParts,
             [label]: checked,
-        })
-    }
+        });
+    };
+
+    const checkboxContent = (speechPart: SpeechPart) => {
+        return (
+            <CheckboxInput label={`${speechPart}s`}
+                key={speechPart}
+                value={speechParts[speechPart]}
+                onUpdate={onCheckboxUpdate.bind(null, speechPart)} />
+        )
+    };
 
     const checkboxesListContent = () => {
-        const content = (Object.keys(speechParts) as SpeechPart[]).map((speechPart: SpeechPart) => {
-            return (
-                <CheckboxInput label={speechPart}
-                    key={speechPart}
-                    value={speechParts[speechPart]}
-                    onUpdate={onCheckboxUpdate.bind(null, speechPart)}
-                />
-            )
-        })
-
-        return content;
-    }
+        return (Object.keys(speechParts) as SpeechPart[])
+            .map((speechPart: SpeechPart) => checkboxContent(speechPart));
+    };
 
     return (
-        <div>
-            <div className='title'>Select</div>
+        <div className='speech-part-chooser'>
+            <div className='speech-part-chooser__title title'>Select</div>
             <div className='speech-part-chooser__checkbox-list'>
                 {checkboxesListContent()}
             </div>
             <button className='button_primary'
-                disabled={!Object.values(speechParts).some(v => v)}
-                onClick={onContinue}>Continue</button>
+                disabled={isContinueDisabled}
+                onClick={onContinueClick}>
+                Continue
+            </button>
         </div>
     )
 }

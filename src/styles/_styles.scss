@@ -2,21 +2,28 @@
 @import './colors';
 
 .button {
-    font-size: $font-size;
+    font-size: 1.1rem;
     border: none;
     cursor: pointer;
     border-radius: calc($unit * 0.5);
-    padding: 3px $unit-2;
+    padding: $unit-half $unit-2;
     color: $black;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.8;
+    }
 }
 
 .button_primary {
     @extend .button;
     background-color: $primary;
     color: $white;
+    font-size: 1.5rem;
+    width: 100%;
 
-    &:hover {
-        opacity: 0.8;
+    svg {
+        transform: scale(1.5);
     }
 }
 
@@ -39,7 +46,6 @@
     padding: 3px 0;
 }
 
-
 .title {
     margin-bottom: $unit;
 }
@@ -50,10 +56,10 @@
 
 .text_secondary {
     @extend .text;
-    font-size: $font-size-secondary;
+    font-size: 0.9rem;
     color: $text-secondary;
 }
 
 .text_primary {
-    font-size: $font-size-big;
+    font-size: 1.1rem;
 }

@@ -1,13 +1,17 @@
-@import '../../../styles/vars';
-@import '../../../styles/colors';
+@import 'styles/vars';
+@import 'styles/colors';
 
 
-.example {
+.pair-content {
     margin-bottom: $unit-2;
 
     &__original {
         color: $white;
         margin-bottom: $unit-half;
+    }
+
+    &__translation {
+        color: $text-secondary;
     }
 
     &:last-of-type {

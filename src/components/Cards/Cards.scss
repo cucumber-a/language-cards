@@ -1,6 +1,7 @@
-@import '../../styles/vars';
+@import 'styles/vars';
 
 .cards {
+    margin: 0 auto;
 
     &__header {
         display: flex;

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { Word } from '../CardsGenerator/CardsGenerator';
-import { WordExample } from '../WordExample/WordExample';
+import React from 'react';
+import { PairContent } from '../PairContent/PairContent';
 import './Card.scss';
+import { Word } from 'types';
+import { IconEye } from 'icons/IconEye';
 
 type CardProps = {
     word: Word;
@@ -11,32 +12,19 @@ type CardProps = {
 export function Card({ word, onNextWord }: CardProps) {
     const [showTranslation, setShowTranslation] = React.useState(false);
 
-    useEffect(() => {
-        setShowTranslation(false);
-    }, [word]);
-
-    const translationContent = () => {
-        return (
-            <div className='card__translation'>
-                <span className='text_primary'>{word.translation}</span>
-
-                <div className='card__examples'>
-                    {word.examples.map((example) => <WordExample key={example.example} example={example} />)}
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div className='card'>
-            <div className='card__description'>
-                <div className='card__word text_primary'>{word.word}</div>
-                {showTranslation && translationContent()}
+            <div className='card__content'>
+                <div className='card__word'>{word.word}</div>
+                {showTranslation && <div className='card__word card__translation'>{word.translation}</div>}
+                {showTranslation && <div className='card__examples'>{word.examples.map((example) => (
+                    <PairContent key={example.example} original={example.example} translation={example.translation} />
+                ))}</div>}
             </div>
 
             <div className='card__actions'>
                 <button className='button_primary button_primary-second' onClick={() => setShowTranslation(!showTranslation)}>
-                    {showTranslation ? 'Hide translation' : 'Show translation'}
+                    <IconEye invisible={showTranslation} />
                 </button>
                 <button className='button_primary' onClick={onNextWord}>Next</button>
             </div>
