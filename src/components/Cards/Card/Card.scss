@@ -2,8 +2,6 @@
 @import 'styles/colors';
 
 .card {
-    border: 1px solid $pink;
-    border-radius: 6px;
     margin: $unit-2 0;
     padding: $unit-2;
     width: 30vw;
@@ -16,15 +14,6 @@
 
     &__content {
         margin-top: $unit-3;
-    }
-
-    &__word {
-        margin-bottom: $unit-half;
-        font-size: 2rem;
-    }
-
-    &__translation {
-        color: $text-secondary;
     }
 
     &__examples {

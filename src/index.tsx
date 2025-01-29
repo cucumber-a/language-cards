@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+import './theme.css';
+import { ThemeProvider } from '@gravity-ui/uikit';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    <App />
+    <ThemeProvider theme="dark">
+        <App />
+    </ThemeProvider>,
 );

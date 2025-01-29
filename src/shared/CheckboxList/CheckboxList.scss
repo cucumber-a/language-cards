@@ -1,0 +1,32 @@
+@import 'styles/vars';
+
+.checkbox-list {
+    ul {
+        list-style: none;
+
+        &.root-ul {
+            padding-inline-start: 0;
+            margin: 0;
+        }
+    }
+
+    li {
+        margin: $unit 0;
+        display: flex;
+        align-items: center;
+        gap: $unit-half;
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+
+        &.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    .root-li {
+        margin: 0;
+    }
+}

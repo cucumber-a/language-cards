@@ -4,14 +4,11 @@
     margin: 0 auto;
 
     &__header {
-        display: flex;
-        flex-direction: column;
-        gap: $unit-half;
-
         .speech-parts {
             display: flex;
             justify-content: flex-start;
             gap: $unit;
+            margin-top: $unit;
         }
     }
 

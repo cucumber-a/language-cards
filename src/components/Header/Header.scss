@@ -2,15 +2,11 @@
 @import 'styles/colors';
 
 .header {
+    $padding: $unit;
     position: fixed;
     top: 0;
-    padding: $unit;
-    padding: 10px;
-    background: #282c34;
-    width: 100%;
-}
-
-.version {
-    color: $text-secondary;
-    font-size: 0.9rem;
+    padding: $padding;
+    width: calc(100% - $padding * 2);
+    display: flex;
+    justify-content: space-between;
 }

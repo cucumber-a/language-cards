@@ -6,14 +6,14 @@ export enum SpeechPartEnum {
     OTHER = 'Other',
 }
 export type SpeechPart = SpeechPartEnum;
-export type Example = {
-    example: string;
-    translation: string;
-}
 export type Word = {
     id: number;
+    speechPart: SpeechPart;
     word: string;
     translation: string;
     examples: Example[];
-}
-export type Words = Record<SpeechPart, Word[]>;
+};
+export type Example = {
+    example: string;
+    translation: string;
+};

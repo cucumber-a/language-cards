@@ -1,34 +1,47 @@
 import React from 'react';
-import { PairContent } from '../PairContent/PairContent';
 import './Card.scss';
-import { Word } from 'types';
-import { IconEye } from 'icons/IconEye';
+import { LanguageCard } from '../Cards';
+import { Button, Card as UiCard, Text, Icon } from '@gravity-ui/uikit';
+import { Eye, EyeSlash } from '@gravity-ui/icons';
 
 type CardProps = {
-    word: Word;
-    onNextWord: () => void;
+    card: LanguageCard;
+    onNextCard: () => void;
 }
 
-export function Card({ word, onNextWord }: CardProps) {
+export function Card({ card, onNextCard }: CardProps) {
     const [showTranslation, setShowTranslation] = React.useState(false);
 
     return (
-        <div className='card'>
+        <UiCard className='card' theme="normal" size="l">
             <div className='card__content'>
-                <div className='card__word'>{word.word}</div>
-                {showTranslation && <div className='card__word card__translation'>{word.translation}</div>}
-                {showTranslation && <div className='card__examples'>{word.examples.map((example) => (
-                    <PairContent key={example.example} original={example.example} translation={example.translation} />
-                ))}</div>}
+                <div>
+                    <Text variant='display-1' color='info'>
+                        {card.primary}
+                    </Text>
+                </div>
+                {showTranslation && (
+                    <div><Text variant='display-1' color='primary'>{card.translation}</Text></div>
+                )}
+
+                {showTranslation && card.examples && card.examples.map((example) => (
+                    <div className='card__examples' key={example.primary}>
+                        <div><Text variant='body-3' color='info'>{example.primary}</Text></div>
+                        <div><Text variant='body-3' color='primary'>{example.translation}</Text></div>
+                    </div>
+                ))}
             </div>
 
             <div className='card__actions'>
-                <button className='button_primary button_primary-second' onClick={() => setShowTranslation(!showTranslation)}>
-                    <IconEye invisible={showTranslation} />
-                </button>
-                <button className='button_primary' onClick={onNextWord}>Next</button>
+                <Button view='outlined-action' size='l' width='max'
+                    onClick={() => setShowTranslation(!showTranslation)}>
+                    {!showTranslation && <Icon data={Eye}></Icon>}
+                    {showTranslation && <Icon data={EyeSlash}></Icon>}
+                </Button>
+                <Button view='action' size='l' width='max' onClick={onNextCard}>
+                    Next
+                </Button>
             </div>
-
-        </div>
+        </UiCard>
     );
 }

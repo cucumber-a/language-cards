@@ -1,58 +1,86 @@
 import React from 'react';
 import './Cards.scss';
-import { SpeechPart, Word, Words } from 'types';
+import { Example, Word } from 'types';
 import { Card } from './Card/Card';
+import { ViewSettings } from 'components/ViewSettings/ViewSettings';
+import { Button, Text } from '@gravity-ui/uikit';
 
 type CardsProps = {
-    speechParts: SpeechPart[];
-    data: Words | undefined;
+    data: Word[] | undefined;
+    settings: ViewSettings;
     onBack: () => void;
 }
 
-const useAllowedWordsState = (selectedSpeechParts: SpeechPart[], data: Words | undefined) => {
-    return React.useState<Word[]>(() => {
+export type LanguageCard = {
+    primary: string;
+    translation: string;
+    examples?: Pick<LanguageCard, 'primary' | 'translation'>[];
+}
+
+const useCardsState = (settings: ViewSettings, data: Word[] | undefined) => {
+    return React.useState<LanguageCard[]>(() => {
         if (!data) return [];
-        const words = selectedSpeechParts.map((speechPart) => data[speechPart]);
-        return words.flat();
+
+        const cards: LanguageCard[] = [];
+        data.forEach((word) => {
+            if (!settings.speechParts.includes(word.speechPart)) return;
+            const reverseTranslation = settings.primaryLanguage !== 'Serbian';
+
+            const primaryProp = !reverseTranslation ? 'example' : 'translation';
+            const translationProp = !reverseTranslation ? 'translation' : 'example';
+            const examples = word.examples.map((example: Example) => ({
+                primary: example[primaryProp],
+                translation: example[translationProp],
+            }));
+
+            if (settings.type === 'sentence' && word.examples?.length) {
+                cards.push(...examples);
+            } else {
+                cards.push({
+                    primary: reverseTranslation ? word.translation : word.word,
+                    translation: reverseTranslation ? word.word : word.translation,
+                    examples: examples,
+                });
+            }
+        });
+
+        return cards;
     });
 }
 
-export function Cards({ speechParts, data, onBack }: CardsProps) {
-    const [allowedWords, setAllowedWords] = useAllowedWordsState(speechParts, data);
+export function Cards({ data, settings, onBack }: CardsProps) {
+    const [cards, setCards] = useCardsState(settings, data);
 
-    const currentWordIndex = React.useMemo(() => {
-        return allowedWords.length > 0 ? Math.floor(Math.random() * allowedWords.length) : -1;
-    }, [allowedWords]);
+    const currentCardIndex = React.useMemo(() => {
+        return cards.length > 0 ? Math.floor(Math.random() * cards.length) : -1;
+    }, [cards]);
 
     const removeCurrentWord = () => {
-        const nextWords = [...allowedWords.slice(0, currentWordIndex), ...allowedWords.slice(currentWordIndex + 1)];
-        setAllowedWords(nextWords);
+        setCards([...cards.slice(0, currentCardIndex), ...cards.slice(currentCardIndex + 1)]);
     }
 
-    const cardsContent = () => {
-        if (!allowedWords.length) {
-            return <div>All words reviewed</div>;
-        }
-        const word = allowedWords[currentWordIndex];
-        return <Card word={word} key={word.word} onNextWord={removeCurrentWord} />
+    const onNextCard = () => {
+        removeCurrentWord();
     }
-
-    const titlesContent = speechParts.map((speechPart) => {
-        return <span key={speechPart} className='text_secondary'>{speechPart}</span>
-    });
 
     return (
         <div className='cards'>
-            <div className="cards__header">
-                <button onClick={onBack}
-                    className='button_ghost cards__back-button'>
+
+            <div className='cards__header'>
+                <Button view='outlined' size='l' width='auto' onClick={onBack}>
                     Back
-                </button>
-                <div className='speech-parts'>{titlesContent}</div>
+                </Button>
+                <div className='speech-parts'>
+                    {settings.speechParts.map(speechPart => (
+                        <Text key={speechPart} color='complementary' variant="body-1">
+                            {speechPart}
+                        </Text>
+                    ))}
+                </div>
             </div>
-            <div className='cards__content'>
-                {cardsContent()}
-            </div>
+
+            {!cards.length && <div className='placeholder'>All cards reviewed</div>}
+            {cards.length && <Card key={cards[currentCardIndex].primary} card={cards[currentCardIndex]} onNextCard={onNextCard} />}
         </div>
     )
 }

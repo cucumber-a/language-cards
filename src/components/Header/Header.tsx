@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.scss';
+import { Text } from '@gravity-ui/uikit';
 
 type HeaderProps = {
     version: string;
@@ -8,9 +9,7 @@ type HeaderProps = {
 export function Header({ version }: HeaderProps) {
     return (
         <div className='header'>
-            <div className='version'>
-                {version}
-            </div>
+            <Text color="secondary">{version}</Text>
         </div>
     )
 }

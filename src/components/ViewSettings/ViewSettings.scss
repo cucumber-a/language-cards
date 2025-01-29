@@ -1,0 +1,10 @@
+@import 'styles/vars';
+
+.settings {
+    &__section {
+        margin: $unit-2 0;
+    }
+    &__title {
+        margin: $unit 0;
+    }
+}
