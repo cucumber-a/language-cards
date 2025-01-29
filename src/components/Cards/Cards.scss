@@ -16,4 +16,13 @@
         align-self: flex-start;
     }
 
+    &__placeholder {
+        width: 30vw;
+        height: 65dvh;
+        min-width: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
