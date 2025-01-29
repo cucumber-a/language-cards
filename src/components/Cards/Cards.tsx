@@ -79,8 +79,8 @@ export function Cards({ data, settings, onBack }: CardsProps) {
                 </div>
             </div>
 
-            {!cards.length && <div className='placeholder'>All cards reviewed</div>}
-            {cards.length && <Card key={cards[currentCardIndex].primary} card={cards[currentCardIndex]} onNextCard={onNextCard} />}
+            {!cards.length && <div className='cards__placeholder'>All cards reviewed</div>}
+            {!!cards.length && <Card key={cards[currentCardIndex].primary} card={cards[currentCardIndex]} onNextCard={onNextCard} />}
         </div>
     )
 }
