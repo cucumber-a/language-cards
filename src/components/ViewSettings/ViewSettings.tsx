@@ -56,7 +56,7 @@ export function ViewSettings({ initialSettings, onSettingsSet }: ViewSettingsPro
                 <div>
                     <RadioButton name="type"
                         onUpdate={(newType) => setSettings({ ...settings, type: newType })}
-                        defaultValue={typeOptions[0].value}
+                        value={settings.type}
                         options={typeOptions}
                         size="xl" />
                 </div>
@@ -69,7 +69,7 @@ export function ViewSettings({ initialSettings, onSettingsSet }: ViewSettingsPro
                 <div>
                     <RadioButton name="language"
                         onUpdate={(language) => setSettings({ ...settings, primaryLanguage: language })}
-                        defaultValue={languageOptions[0].value}
+                        value={settings.primaryLanguage}
                         options={languageOptions}
                         size="xl" />
                 </div>
